@@ -87,3 +87,34 @@ export const getUserOrders = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+// Get All Orders (for admin or chef)
+export const getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({})
+      .sort({ createdAt: -1 })
+      .populate("user", "name email")
+      .populate("items.menu", "title price");
+
+    res.json({ success: true, orders });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// Update Order Status
+export const updateOrderStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ message: "Order not found" });
+
+    order.status = status;
+    await order.save();
+
+    res.json({ success: true, message: "Status updated", order });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
