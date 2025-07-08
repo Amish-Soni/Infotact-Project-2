@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -27,6 +28,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.get("/", (req, res) => {
   res.send("Home Cook Food Delivery API is running...");
 });
+
+app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
