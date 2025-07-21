@@ -12,10 +12,13 @@ HomeCook is a full-stack MERN (MongoDB, Express, React, Node.js) web application
 ---
 
 ## 📂 Folder Structure
+
+```
 HomeCook/
 ├── backend/          # Node.js + Express API
 ├── frontend/         # ReactJS client app
 └── README.md
+```
 
 ---
 
@@ -84,7 +87,7 @@ HomeCook/
 ### 1. Clone the repository
 
 ```bash
-git clone <your-github-repo-url.git>
+git clone https://github.com/Amish-Soni/Infotact-Project-2
 cd HomeCook
 ```
 
