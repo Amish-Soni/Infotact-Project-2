@@ -146,4 +146,5 @@ npm run dev
 
 ---
 
-### Under the project: HomeCook - On-demand Home Cook Food Delivery Platform Stack: MERN
+### Under the project: HomeCook - On-demand Home Cook Food Delivery Platform 
+### Stack: MERN
