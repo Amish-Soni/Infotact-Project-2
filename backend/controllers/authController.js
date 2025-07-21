@@ -89,7 +89,14 @@ export const loginController = async (req, res) => {
 
 // LOGOUT
 export const logoutController = (req, res) => {
-  res.clearCookie("token").json({ message: "Logged out" });
+  res
+    .clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+    })
+    .json({ message: "Logged out" });
 };
 
 // GET CURRENT USER
