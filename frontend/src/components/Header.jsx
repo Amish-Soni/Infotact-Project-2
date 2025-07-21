@@ -9,11 +9,15 @@ const Header = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleLogout = () => {
-    logout();
-    toast.success("Logged out successfully");
-    navigate("/login");
-    setMenuOpen(false); // Close menu on logout
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Logged out successfully");
+      navigate("/login");
+      setMenuOpen(false);
+    } catch (error) {
+      toast.error("Logout failed. Please try again.");
+    }
   };
 
   return (
