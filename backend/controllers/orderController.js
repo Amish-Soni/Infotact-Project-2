@@ -20,6 +20,7 @@ export const createRazorpayOrder = async (req, res) => {
 };
 
 // Step 2 — Verify Razorpay Signature
+// Step 2 — Verify Razorpay Signature
 export const verifyPayment = async (req, res) => {
   try {
     const {
@@ -43,22 +44,29 @@ export const verifyPayment = async (req, res) => {
         .status(400)
         .json({ success: false, message: "Invalid signature" });
 
-    // Get cart
-    const cart = await Cart.findOne({ user: req.user._id });
+    // FIX 1: Populate the cart with menu details to access price
+    const cart = await Cart.findOne({ user: req.user._id }).populate(
+      "items.menu",
+      "price"
+    );
+
     if (!cart || cart.items.length === 0) {
       return res.status(400).json({ success: false, message: "Cart is empty" });
     }
 
-    // Create order
-    const totalAmount = cart.items.reduce(
+    // FIX 2: Recalculate total including the delivery fee
+    const subtotal = cart.items.reduce(
       (acc, item) => acc + item.quantity * item.menu.price,
       0
     );
+    const deliveryFee = 50; // Use the same fee as the frontend
+    const totalAmount = subtotal + deliveryFee;
 
+    // Create order
     const order = await Order.create({
       user: req.user._id,
       items: cart.items,
-      totalAmount,
+      totalAmount, // This amount now correctly matches what was paid
       deliveryType,
       deliveryAddress,
       paymentStatus: "Paid",
@@ -72,6 +80,7 @@ export const verifyPayment = async (req, res) => {
 
     res.json({ success: true, order });
   } catch (err) {
+    console.error("VERIFY PAYMENT ERROR:", err); // Added for better debugging
     res.status(500).json({ success: false, message: err.message });
   }
 };

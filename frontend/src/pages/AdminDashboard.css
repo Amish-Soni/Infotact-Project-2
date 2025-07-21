@@ -1,0 +1,17 @@
+.admin-dashboard-container {
+  max-width: 1400px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.admin-dashboard-container h1 {
+  text-align: center;
+  color: #c0392b; /* Admin-specific color */
+  margin-bottom: 5px;
+}
+
+.admin-dashboard-container > p {
+  text-align: center;
+  color: #555;
+  margin-bottom: 30px;
+}

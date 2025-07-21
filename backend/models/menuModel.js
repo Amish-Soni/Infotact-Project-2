@@ -21,10 +21,6 @@ const menuSchema = new mongoose.Schema(
         type: String,
       },
     ],
-    availableDate: {
-      type: Date,
-      required: true,
-    },
     isAvailable: {
       type: Boolean,
       default: true,

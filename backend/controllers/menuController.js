@@ -3,7 +3,7 @@ import Menu from "../models/menuModel.js";
 // Create Menu Item
 export const createMenuItem = async (req, res) => {
   try {
-    const { title, description, price, availableDate, category } = req.body;
+    const { title, description, price, category } = req.body;
     const images = req.files?.map((file) => `/uploads/${file.filename}`) || [];
 
     const menu = await Menu.create({
@@ -11,7 +11,7 @@ export const createMenuItem = async (req, res) => {
       title,
       description,
       price,
-      availableDate,
+
       category,
       images,
     });
@@ -50,7 +50,7 @@ export const getChefMenus = async (req, res) => {
 // Update Menu Item
 export const updateMenuItem = async (req, res) => {
   try {
-    const { title, description, price, availableDate, category } = req.body;
+    const { title, description, price, category } = req.body;
     const images = req.files?.map((file) => `/uploads/${file.filename}`) || [];
 
     const updated = await Menu.findOneAndUpdate(
@@ -59,7 +59,7 @@ export const updateMenuItem = async (req, res) => {
         title,
         description,
         price,
-        availableDate,
+
         category,
         ...(images.length > 0 && { images }),
       },

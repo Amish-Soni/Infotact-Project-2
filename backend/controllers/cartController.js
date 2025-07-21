@@ -9,19 +9,19 @@ export const addToCart = async (req, res) => {
     let cart = await Cart.findOne({ user: userId });
 
     if (!cart) {
-      cart = await Cart.create({
-        user: userId,
-        items: [{ menu: menuId, quantity }],
-      });
-    } else {
-      const index = cart.items.findIndex((i) => i.menu.toString() === menuId);
-      if (index > -1) {
-        cart.items[index].quantity += quantity;
-      } else {
-        cart.items.push({ menu: menuId, quantity });
-      }
-      await cart.save();
+      cart = new Cart({ user: userId, items: [] });
     }
+
+    const index = cart.items.findIndex((i) => i.menu.toString() === menuId);
+    if (index > -1) {
+      cart.items[index].quantity += quantity;
+    } else {
+      cart.items.push({ menu: menuId, quantity });
+    }
+    await cart.save();
+
+    // FIX: Populate the cart before sending it back
+    await cart.populate("items.menu");
 
     res.status(200).json({ success: true, cart });
   } catch (err) {
@@ -29,7 +29,7 @@ export const addToCart = async (req, res) => {
   }
 };
 
-// Get Cart
+// Get Cart (This one is already correct)
 export const getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ user: req.user._id }).populate(
@@ -52,8 +52,17 @@ export const updateCartItem = async (req, res) => {
     const item = cart.items.find((i) => i.menu.toString() === menuId);
     if (!item) return res.status(404).json({ message: "Item not in cart" });
 
-    item.quantity = quantity;
+    // Prevent quantity from being less than 1
+    if (quantity < 1) {
+      cart.items = cart.items.filter((i) => i.menu.toString() !== menuId);
+    } else {
+      item.quantity = quantity;
+    }
+
     await cart.save();
+
+    // FIX: Populate the cart before sending it back
+    await cart.populate("items.menu");
 
     res.status(200).json({ success: true, cart });
   } catch (err) {
@@ -72,13 +81,16 @@ export const removeCartItem = async (req, res) => {
     cart.items = cart.items.filter((i) => i.menu.toString() !== menuId);
     await cart.save();
 
+    // FIX: Populate the cart before sending it back
+    await cart.populate("items.menu");
+
     res.status(200).json({ success: true, cart });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
 };
 
-// Clear Cart
+// Clear Cart (No change needed here)
 export const clearCart = async (req, res) => {
   try {
     await Cart.findOneAndDelete({ user: req.user._id });

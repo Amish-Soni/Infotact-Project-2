@@ -1,4 +1,5 @@
 import express from "express";
+import Category from "../models/categoryModel.js";
 import { upload } from "../middlewares/multerMiddleware.js";
 import {
   createMenuItem,
@@ -37,5 +38,14 @@ router.put(
 
 // Delete a menu item
 router.delete("/:id", requireSignIn, isChef, deleteMenuItem);
+
+router.get("/categories", async (req, res) => {
+  try {
+    const categories = await Category.find({});
+    res.json(categories);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 export default router;

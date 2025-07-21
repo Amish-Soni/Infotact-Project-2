@@ -1,0 +1,65 @@
+.order-management-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.order-management-container h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.orders-table-wrapper {
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.orders-table th {
+  background-color: #f4f4f4;
+}
+
+.table-item-list {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.status-select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: white;
+  font-weight: bold;
+}
+
+/* Match colors with UserOrders page for consistency */
+.status-select.status-pending {
+  background-color: #f39c12;
+}
+.status-select.status-confirmed {
+  background-color: #3498db;
+}
+.status-select.status-preparing {
+  background-color: #9b59b6;
+}
+.status-select.status-ready {
+  background-color: #1abc9c;
+} /* Added ready status */
+.status-select.status-delivered {
+  background-color: #27ae60;
+}
+.status-select.status-cancelled {
+  background-color: #e74c3c;
+}
