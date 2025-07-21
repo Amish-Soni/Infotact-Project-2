@@ -20,7 +20,11 @@ const __dirname = path.dirname(__filename);
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", process.env.FRONTEND_URL],
+    origin: [
+      "http://localhost:5173",
+      process.env.FRONTEND_URL,
+      "https://homecookfood.netlify.app",
+    ],
     credentials: true,
   })
 );
