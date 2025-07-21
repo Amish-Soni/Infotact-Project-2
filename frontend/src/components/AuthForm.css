@@ -1,0 +1,41 @@
+.auth-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+  padding: 20px;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--surface-color);
+  padding: 30px 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.auth-container h2 {
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+/* Use the global .btn classes for the button */
+.auth-container .auth-button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.auth-switch-link {
+  margin-top: 20px;
+  color: var(--text-light);
+}
+
+.auth-switch-link a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}

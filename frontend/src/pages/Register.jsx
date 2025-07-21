@@ -1,10 +1,9 @@
-// src/pages/Register.jsx
 import React, { useState } from "react";
 import axiosInstance from "../api/axios";
 import toast from "react-hot-toast";
-import { useNavigate, Link } from "react-router-dom";
-import AuthForm from "../components/AuthForm";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import AuthLayout from "../components/AuthLayout"; // Import the new layout
 
 const Register = () => {
   const { login } = useAuth();
@@ -30,17 +29,12 @@ const Register = () => {
   };
 
   return (
-    <>
-      <AuthForm
-        handleSubmit={handleSubmit}
-        formData={formData}
-        setFormData={setFormData}
-        isRegister={true}
-      />
-      <p style={{ textAlign: "center" }}>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
-    </>
+    <AuthLayout
+      isRegister={true}
+      formData={formData}
+      setFormData={setFormData}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 

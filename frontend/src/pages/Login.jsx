@@ -1,10 +1,9 @@
-// src/pages/Login.jsx
 import React, { useState } from "react";
 import axiosInstance from "../api/axios";
 import toast from "react-hot-toast";
-import { useNavigate, Link } from "react-router-dom";
-import AuthForm from "../components/AuthForm";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import AuthLayout from "../components/AuthLayout"; // Import the new layout
 
 const Login = () => {
   const { login } = useAuth();
@@ -24,17 +23,12 @@ const Login = () => {
   };
 
   return (
-    <>
-      <AuthForm
-        handleSubmit={handleSubmit}
-        formData={formData}
-        setFormData={setFormData}
-        isRegister={false}
-      />
-      <p style={{ textAlign: "center" }}>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
-    </>
+    <AuthLayout
+      isRegister={false}
+      formData={formData}
+      setFormData={setFormData}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 

@@ -1,62 +1,155 @@
 .main-header {
+  background-color: var(--surface-color);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0 20px;
+}
+
+.header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 70px;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #e67e22;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
-.main-header nav a,
-.main-header .auth-links a {
-  margin: 0 1rem;
+/* Base Nav Menu Styles */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-menu a {
   text-decoration: none;
-  color: #333;
+  color: var(--text-color);
   font-weight: 500;
-  transition: color 0.2s;
+  position: relative;
+  padding: 5px 0;
 }
 
-.main-header nav a:hover,
-.main-header .auth-links a:hover {
-  color: #e67e22;
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
 }
 
-.main-header nav a.active {
-  color: #e67e22;
-  border-bottom: 2px solid #e67e22;
-  padding-bottom: 4px;
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+  width: 100%;
 }
 
-.auth-links {
+.desktop-auth-links {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
+/* --- NEW STYLES START HERE --- */
+
+/* Style the "Login", "Register", and "Cart" links */
+.desktop-auth-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Add a subtle hover effect */
+.desktop-auth-links a:hover {
+  color: var(--primary-color);
+  background-color: var(--background-color);
+}
+
+/* Style the "Welcome" message */
+.desktop-auth-links span {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* --- NEW STYLES END HERE --- */
+
 .logout-btn {
-  background: #e74c3c;
+  background: var(--danger-color);
   color: white;
   border: none;
   padding: 8px 12px;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 .logout-btn:hover {
-  background: #c0392b;
+  background-color: #e74c3c;
 }
 
-.cart-link {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+/* Mobile-only elements */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.mobile-auth-links {
+  display: none;
+}
+
+/* Tablet & Mobile Styles */
+@media (max-width: 850px) {
+  .desktop-auth-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    left: -100%; /* Start off-screen */
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color: var(--surface-color);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 2rem;
+    transition: left 0.3s ease-in-out;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .mobile-auth-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+    width: 80%;
+  }
+
+  .mobile-auth-links .cart-link,
+  .mobile-auth-links .logout-btn {
+    font-size: 1.2rem;
+  }
 }

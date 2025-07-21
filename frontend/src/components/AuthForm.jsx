@@ -1,62 +1,75 @@
-// src/components/AuthForm.jsx
 import React from "react";
+import "./AuthForm.css"; // Import the new CSS
 
-const AuthForm = ({ handleSubmit, formData, setFormData, isRegister }) => {
+const AuthForm = ({
+  handleSubmit,
+  formData,
+  setFormData,
+  isRegister,
+  title,
+}) => {
   return (
-    <form onSubmit={handleSubmit} className="auth-container">
-      <h2>{isRegister ? "Register" : "Login"}</h2>
+    <div className="auth-container">
+      <h2>{title}</h2>
+      <form onSubmit={handleSubmit}>
+        {isRegister && (
+          <>
+            <input
+              type="text"
+              placeholder="Name"
+              required
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="Address"
+              required
+              value={formData.address}
+              onChange={(e) =>
+                setFormData({ ...formData, address: e.target.value })
+              }
+            />
+          </>
+        )}
 
-      {isRegister && (
-        <>
-          <input
-            type="text"
-            placeholder="Name"
-            required
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Address"
-            required
-            value={formData.address}
-            onChange={(e) =>
-              setFormData({ ...formData, address: e.target.value })
-            }
-          />
-        </>
-      )}
-
-      <input
-        type="email"
-        placeholder="Email"
-        required
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-      />
-
-      <input
-        type="password"
-        placeholder="Password"
-        required
-        value={formData.password}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-      />
-
-      {isRegister && (
-        <select
+        <input
+          type="email"
+          placeholder="Email"
           required
-          value={formData.role}
-          onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-        >
-          <option value="">Select Role</option>
-          <option value="user">Customer</option>
-          <option value="chef">Chef</option>
-        </select>
-      )}
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        />
 
-      <button type="submit">{isRegister ? "Create Account" : "Login"}</button>
-    </form>
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          value={formData.password}
+          onChange={(e) =>
+            setFormData({ ...formData, password: e.target.value })
+          }
+        />
+
+        {isRegister && (
+          <select
+            required
+            value={formData.role}
+            onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+          >
+            <option value="">Select Role</option>
+            <option value="user">Customer</option>
+            <option value="chef">Chef</option>
+          </select>
+        )}
+
+        <button type="submit" className="btn btn-secondary auth-button">
+          {isRegister ? "Create Account" : "Login"}
+        </button>
+      </form>
+    </div>
   );
 };
 

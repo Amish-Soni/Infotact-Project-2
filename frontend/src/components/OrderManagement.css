@@ -63,3 +63,10 @@
 .status-select.status-cancelled {
   background-color: #e74c3c;
 }
+
+/* Update this existing rule in OrderManagement.css */
+.orders-table-wrapper {
+  overflow-x: auto; /* This is the key property */
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}

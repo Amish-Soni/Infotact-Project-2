@@ -1,55 +1,92 @@
-/* index.css */
-body {
+/* src/index.css */
+
+/* 1. Google Font Import */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* 2. CSS Variables for Theming */
+:root {
+  --primary-color: #e67e22; /* Orange for main actions */
+  --secondary-color: #27ae60; /* Green for success/buttons */
+  --danger-color: #c0392b; /* Red for delete/logout */
+  --text-color: #34495e;
+  --text-light: #7f8c8d;
+  --background-color: #f8f0e5; /* A warmer off-white */
+  --surface-color: #ffffff; /* For cards and forms */
+  --border-color: #ecf0f1;
+
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --border-radius: 8px;
+}
+
+/* 3. Global Resets and Base Styles */
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: "Poppins", sans-serif;
-  background-color: #fff8f0;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
 }
 
-.auth-container {
-  max-width: 400px;
-  margin: 60px auto;
-  padding: 30px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+/* 4. Global Container Class */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.auth-container h2 {
-  text-align: center;
-  color: #e67e22;
-  margin-bottom: 20px;
-}
-
-.auth-container input {
+/* 5. Base Form & Button Styling */
+input,
+select,
+textarea {
+  font-family: "Poppins", sans-serif;
   width: 100%;
   padding: 12px;
   margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.auth-container button {
-  width: 100%;
-  padding: 12px;
-  background-color: #27ae60;
-  color: white;
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
   border: none;
-  border-radius: 6px;
-  font-weight: bold;
+  border-radius: var(--border-radius);
+  font-weight: 600;
   cursor: pointer;
-}
-
-.auth-container button:hover {
-  background-color: #219150;
-}
-
-.auth-container p {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.auth-container a {
-  color: #e67e22;
   text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(230, 126, 34, 0.3);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
 }
